@@ -1,0 +1,26 @@
+@0 = ~DaxTweaks~
+
+@10 = ~Properly change Imoen Avatar to Mage in BG2 - CDTweaks correction~
+@20 = ~Replace the generic Lich in the "Spawn Undead" script (Install after SCS/Tactics if present)~
+@21 = ~Replace with a comparatively easier custom spellcasting Ancient Mummy (Install after SCS/Tactics if present)~
+@22 = ~Replace with a vanilla Ancient Vampire (Install after SCS/Tactics if present)~
+@30 = ~Replace the Lich in the City Gates Inn~
+@31 = ~Replace with a comparatively easier custom spellcasting Ancient Mummy~
+@32 = ~replace with a vanilla Greater Mummy~
+@40 = ~Charisma Affects Store Prices More (klatu revised)~
+@50 = ~Spellcasters cast Cacofiend and Gate far from themselves, so they don't end up fighting their own summoned demon (Useless with SCS)~
+@60 = ~Use pre-EE Spell Deflection Globe (EE only)~
+@61 = ~Only for Spell Trap (recommended)~
+@62 = ~For all spells using that animation~
+@5000 = ~Required files missing -- Install BG2EE first~
+@5001 = ~Required mod missing: Tweaks Anthology - Change Imoen's Avatar to Mage~
+@5002 = ~This component requires Baldur's Gate 2: Enhanced Edition to be installed~
+@5003 = ~SCS Smarter Mages detected - Skipping this component as it is redundant~
+@5004 = ~Item Randomiser detected, not re-distributing 1 item meant to be randomised~
+
+@400 = ~Protected by Death Ward~
+@401 = ~Protected by Blade Barrier~
+@402 = ~Create Greater Undead—Skeleton Warrior~
+@407 = ~Protected by Iron Skins~
+
+@1006 = ~Ancient Mummy~
