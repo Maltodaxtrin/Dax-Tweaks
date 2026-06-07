@@ -1,8 +1,8 @@
-![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Maltodaxtrin/Portraits-for-Cowled-Menace?include_prereleases)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Maltodaxtrin/Dax-Tweaks?include_prereleases)
 ![Platform](https://img.shields.io/static/v1?label=platform&message=windows%20%7C%20macos%20%7C%20linux&color=informational)
 ![License](https://img.shields.io/static/v1?label=license&message=CC-BY-NC-4.0&color=green)
 
-# DaxTweaks
+# Dax Tweaks
 
 Various minor tweaks I made for my game. See if they can be of use to you as well! Some of these tweaks were included in my mod Cowled Menace before, but were moved here for simplicity's sake instead. Although they were optional, a quest expansion mod bundling in tweaks as well wasn't ideal and not quite what people were expecting of a quest expansion mod.
 
@@ -21,7 +21,7 @@ Compatibility depends on the component, see each component below for more inform
 
 ## Installation
 
-**Windows** </br> DaxTweaks is packaged and installed with WeiDU and is distributed as a self-extracting archive. To install, simply double-click the archive and follow the instructions on screen.
+**Windows** </br> Dax Tweaks is packaged and installed with WeiDU and is distributed as a self-extracting archive. To install, simply double-click the archive and follow the instructions on screen.
 
 Alternatively the files can be extracted from the archive using WinRAR. If properly extracted, you should have a "**DaxTweaks**" folder and **setup-DaxTweaks.exe** in your BG2 folder. To install, double-click **setup-DaxTweaks.exe** and follow the instructions on screen.
 
