@@ -35,7 +35,7 @@ Here is a list of components available for installation.
 
 If you install SCS Smarter Mages and play on Insane difficulty, specific vanilla spellcasters in SoA will have access to HLAs, but not all of them. The selection is arbitrary, and most notably doesn't include any modded NPCs such as the ones from Cowled Menace.
 
-So if you want "HLA's for specific spellcasters in the game" setting to include those from Cowled Menace as well (I recommend it since they are indeed worthy of them lore-wise), then install this component. Now the spellcasters from Cowled Menace will hurl planetars at you on Insane difficulty, as intended (of course). If it ain't a planetar, it's gonna be a Comet or a Dragon's Breath. Good times!
+So if you want "HLA's for specific spellcasters in the game" setting to include those from Cowled Menace as well (I recommend it since some of them are indeed worthy of them lore-wise), then install this component. Now some spellcasters from Cowled Menace (3 to be exact) will be able to hurl planetars at you on Insane difficulty, as intended (of course). If it ain't a planetar, it's gonna be a Comet or a Dragon's Breath. Good times!
 
 Why isn't this included in the main Cowled Menace mod? Because this tweak needs to be installed after SCS, while Cowled Menace is installed way earlier (after NPC mods). Also, many tweaks here have to be installed after SCS, so it's a good fit. 
 Compatibility: This component requires both Cowled Menace and SCS Smarter Mages to be installed. It's 100% compatible with everything else as it does nothing except unlock SCS HLA's.
