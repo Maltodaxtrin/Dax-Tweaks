@@ -29,7 +29,7 @@ Please run **setup-DaxTweaks.exe** in your BG2 folder to reinstall, uninstall, o
 
 ## Components
 
-**Add Cowled Menace spellcasters to the list of SCS mages that receive HLA's (unlock their HLA's)"
+**Add Cowled Menace spellcasters to the list of SCS mages that receive HLA's (unlock their HLA's)**
 
 If you install SCS Smarter Mages and play on Insane difficulty, specific vanilla spellcasters in SoA will have access to HLAs, but not all of them. The selection is arbitrary, and most notably doesn't include any modded NPCs such as the ones from Cowled Menace.
 
