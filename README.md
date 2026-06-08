@@ -1,5 +1,5 @@
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Maltodaxtrin/Dax-Tweaks?include_prereleases)
-![Platform](https://img.shields.io/static/v1?label=platform&message=windows%20%7C%20macos%20%7C%20linux&color=informational)
+![Platform](https://img.shields.io/static/v1?label=platform&message=windows%20%7C%20&color=informational)
 ![License](https://img.shields.io/static/v1?label=license&message=CC-BY-NC-4.0&color=green)
 
 # Dax Tweaks
@@ -29,15 +29,16 @@ Please run **setup-DaxTweaks.exe** in your BG2 folder to reinstall, uninstall, o
 
 ## Components
 
+Here is a list of components available for installation.
+
 **Add Cowled Menace spellcasters to the list of SCS mages that receive HLA's (unlock their HLA's)**
 
 If you install SCS Smarter Mages and play on Insane difficulty, specific vanilla spellcasters in SoA will have access to HLAs, but not all of them. The selection is arbitrary, and most notably doesn't include any modded NPCs such as the ones from Cowled Menace.
 
-So if you want "HLA's for specific spellcasters in the game" setting to include those from Cowled Menace as well (I recommend it since it fits the lore), then install this component. Now the spellcasters from Cowled Menace will (probably) hurl planetars at you on Insane difficulty, as intended (of course). If it ain't a planetar, it's gonna be a Comet or a Dragon's Breath. Good times!
+So if you want "HLA's for specific spellcasters in the game" setting to include those from Cowled Menace as well (I recommend it since they are indeed worthy of them lore-wise), then install this component. Now the spellcasters from Cowled Menace will (probably) hurl planetars at you on Insane difficulty, as intended (of course). If it ain't a planetar, it's gonna be a Comet or a Dragon's Breath. Good times!
 
-Why isn't this included in the main Cowled Menace mod? Because this tweak needs to be installed after SCS, while Cowled Menace is install way earlier (after NPC mods). Also, many tweaks here have to be installed after SCS, so it's a good fit. 
-
-Compatibility: This component requires both Cowled Menace and SCS Smarter Mages to be installed. It's 100% compatible with everything else as it does precious little except unlock SCS HLA's.
+Why isn't this included in the main Cowled Menace mod? Because this tweak needs to be installed after SCS, while Cowled Menace is installed way earlier (after NPC mods). Also, many tweaks here have to be installed after SCS, so it's a good fit. 
+Compatibility: This component requires both Cowled Menace and SCS Smarter Mages to be installed. It's 100% compatible with everything else as it does nothing except unlock SCS HLA's.
 
 **Properly change Imoen Avatar to Mage in BG2 - CDTweaks**
 
@@ -106,7 +107,7 @@ This component has 2 options to choose from: Either the old pre-EE globe is adde
 
 ![Visuals screenshot](https://media.invisioncic.com/u284679/monthly_2026_05/image.png.f7e920de1eb90ad427bf94dcdd16a37c.png)
 
-As of May 5th 2026 (v2.0.1 of Cowled Menace), this component works as expected. If you installed it before that along with Cowled Menace, it is probably not working as intended (the effect doesn't expire). Sorry about that.
+As of May 5th 2026 (v2.0.1 of Cowled Menace), this component works as expected. If you installed it before that along with Cowled Menace, it is probably not working as intended (the effect doesn't expire). Sorry about that. It's no longer part of Cowled Menace and is instead in this tweaks mod.
 
 ## Thanks and Acknowledgements
 
