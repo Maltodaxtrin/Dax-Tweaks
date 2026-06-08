@@ -1,5 +1,6 @@
 @0 = ~DaxTweaks~
 
+@5 = ~Add Cowled Menace spellcasters to the list of SCS spellcasters that receive HLA's (unlock their HLA's)~
 @10 = ~Properly change Imoen Avatar to Mage in BG2 - CDTweaks correction~
 @20 = ~Replace the generic Lich in the "Spawn Undead" script (Install after SCS/Tactics if present)~
 @21 = ~Replace with a comparatively easier custom spellcasting Ancient Mummy (Install after SCS/Tactics if present)~
@@ -17,6 +18,8 @@
 @5002 = ~This component requires Baldur's Gate 2: Enhanced Edition to be installed~
 @5003 = ~SCS Smarter Mages detected - Skipping this component as it is redundant~
 @5004 = ~Item Randomiser detected, not re-distributing 1 item meant to be randomised~
+@5005 = ~SCS Smarter Mages required for this component - Please install Sword Coast Stratagems - Smarter Mages to proceed~
+@5006 = ~Required mod missing -- Install Cowled Menace first~
 
 @400 = ~Protected by Death Ward~
 @401 = ~Protected by Blade Barrier~

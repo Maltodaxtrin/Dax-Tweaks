@@ -17,7 +17,7 @@ Various minor tweaks I made for my game. See if they can be of use to you as wel
 
 ## Compatibility
 
-Compatibility depends on the component, see each component below for more information.
+Compatibility depends on the component, see each component below for more information, but in general these tweaks are designed to compliment and be installed after SCS. So, pretty late. Most likely last. 
 
 ## Installation
 
@@ -29,6 +29,16 @@ Please run **setup-DaxTweaks.exe** in your BG2 folder to reinstall, uninstall, o
 
 ## Components
 
+**Add Cowled Menace spellcasters to the list of SCS mages that receive HLA's (unlock their HLA's)"
+
+If you install SCS Smarter Mages and play on Insane difficulty, specific vanilla spellcasters in SoA will have access to HLAs, but not all of them. The selection is arbitrary, and most notably doesn't include any modded NPCs such as the ones from Cowled Menace.
+
+So if you want "HLA's for specific spellcasters in the game" setting to include those from Cowled Menace as well (I recommend it since it fits the lore), then install this component. Now the spellcasters from Cowled Menace will (probably) hurl planetars at you on Insane difficulty, as intended (of course). If it ain't a planetar, it's gonna be a Comet or a Dragon's Breath. Good times!
+
+Why isn't this included in the main Cowled Menace mod? Because this tweak needs to be installed after SCS, while Cowled Menace is install way earlier (after NPC mods). Also, many tweaks here have to be installed after SCS, so it's a good fit. 
+
+Compatibility: This component requires both Cowled Menace and SCS Smarter Mages to be installed. It's 100% compatible with everything else as it does precious little except unlock SCS HLA's.
+
 **Properly change Imoen Avatar to Mage in BG2 - CDTweaks**
 
 The Tweaks Anthology component that changes Imoen's Avatar to mage only changes her avatar for playable versions of Imoen. This component also replaces the missing 14 instances of Imoen used in cutscenes and dreams throughout the game with a mage avatar. For consistency purposes.
@@ -37,7 +47,7 @@ Compatibility: This component does not account for new versions of Imoen added b
 
 **Replace the generic Lich in the "Spawn Undead" script (Install after SCS/Tactics if present)**
 
-There are too many liches in this game in my opinion, and their overuse degrades the impact of their presence. Also, my mod Cowled Menace adds 2 liches due to the vastly increased involvement of the Twisted Rune (in sensible locations, to my defense; They are a cabal of liches after all...), so I felt I needed to reduce their numbers elsewhere to compensate. Also, lore-wise, liches shouldn't be as common, especially not in random places. Going from 12 to 8 liches in SoA in total I think is a nice improvement on vanilla worth installing this component for, and even down to 7 with the next component. Or in total with Cowled Menace installed: 9 liches, down from 14. Still too many, but more palatable.
+Lore-wise, liches shouldn't be as common, *especially* not in random places.
 
 What does this component do? Simple. It dynamically removes the 4 generic liches in the level-dependent undead spawn: If you're high level enough, 2 of them spawn in Temple Ruins (Umar Hills), 1 in Ghoul Town (Unseeing Eye), and 1 in Spellhold (Bodhi's Hunt Level 2), replacing them with one of two options: 
 
@@ -46,7 +56,9 @@ What does this component do? Simple. It dynamically removes the 4 generic liches
 
 The mummy is one that I created. More on that mummy in the component directly below. This way you can keep the hardest level-dependent spawns active in your game (for instance, with SCS you might want to always have the hardest spawns on for challenge purposes), except without any liches being present as they are so far and above the enemies of the other spawns in terms of challenge level, and them being there in the first place makes little sense in-universe.
 
-Compatibility: This edit is done in an incredibly compatibility-friendly way (targeted REPLACE_TEXTUALLY on SPWNDEAD.BCS) and is compatible with SCS and Tactics in the sense that it will keep all of their changes, except the liches will be gone. It should be installed after SCS and Tactics Remix, otherwise they will undo my change since they replace the "SPWNDEAD" script entirely, deleting the changes this component makes. Note that for Tactics Remix, it's unintuitively the "Improved Undead" component that replaces the "SPWNDEAD" script, not the "Always Toughest Random Spawns in Dungeons" one, while for SCS it is the "Tie difficulty of level-dependent monster groupings to the difficulty slider" component that does it. Regardless, my component will work if installed after them, without breaking anything they have implemented. Obviously, this component works on a vanilla game, not just on SCS/Tactics installs.
+So, going from 12 to 8 liches in SoA in total I think is a nice improvement on vanilla worth installing this component for, and even down to 7 with the next component. Still too many, but more palatable.
+
+Compatibility: This edit is done in an incredibly compatibility-friendly way (targeted REPLACE_TEXTUALLY on SPWNDEAD.BCS) and is compatible with SCS and Tactics in the sense that it will keep all of their changes, except the liches will be replaced. It should be installed after SCS and Tactics Remix, otherwise they will undo my change since they replace the "SPWNDEAD" script entirely, deleting the changes this component makes. Note that for Tactics Remix, it's unintuitively the "Improved Undead" component that replaces the "SPWNDEAD" script, not the "Always Toughest Random Spawns in Dungeons" one, while for SCS it is the "Tie difficulty of level-dependent monster groupings to the difficulty slider" component that does it. Regardless, my component will work if installed after them, without breaking anything they have implemented. Obviously, this component works on a vanilla game, not just on SCS/Tactics installs.
 
 **Replace the Lich in the City Gates Inn**
 
@@ -54,9 +66,9 @@ In very much the same vein as the component above, the goal of this component is
 
 Like the previous component, the options are either a custom spellcasting mummy (exactly the same as above) or a Greater Mummy (vanilla enemy)
 
-Compatibility: Although the edit is done in the most compatibility-friendly way possible, it remains that SCS will not update the combat script of this custom mummy, so it won't benefit from the added difficulty of SCS. I have given the mummy a reasonably-competent AI that should make it at least a passable challenge. For a mummy anyway. Definitely don't expect a Lich-level challenge, but it could still surprise you if caught unprepared. 
+Compatibility: My tweaks should be installed after SCS and so the mummy will not benefit from the improved SCS AI (the vampire will since it's a vanilla enemy). I have given the mummy a reasonably-competent AI that should make it at least a passable challenge. For a mummy anyway. Definitely don't expect a Lich-level challenge, but it could still surprise you if caught unprepared. I am still looking for ways to add the SCS AI to the mummy if SCS is installed, but since SCS is so modular, it's quite hard to figure out the whole thing. But it's functional right now for sure.
 
-I have accounted for Item Randomiser, so if it's installed, the Rod of Terror belonging to the Lich in the vanilla game won't be re-added back. The chest in the area is unaffected and will work fine with the randomisation. As this is a tweak mod, you should install Item Randomiser first before this mod. Any other mod that somehow requires the City Gates Inn Lich specifically for something precise, or adds items to this Lich, will be incompatible by virtue of these items being distributed to a creature that is no longer in the game. Obviously this component will break any mod that requires it to be, well, there. It's no longer there.
+I have accounted for Item Randomiser, so if it's installed, the Rod of Terror belonging to the Lich in the vanilla game won't be re-added back. The chest in the area is unaffected and will work fine with the randomisation. As this is a tweak mod, you should install Item Randomiser first before this mod. Any other mod that somehow requires the City Gates Inn Lich specifically for something precise, or adds items to this Lich, will be incompatible by virtue of these items being distributed to a creature that is no longer in the game. Obviously this component will break any mod that requires it to be, well, there. It's no longer there. Please let me know if such a mod exists besides item randomiser so I can account for it. 
 
 **Charisma Affects Store Prices More (klatu revised)**
 

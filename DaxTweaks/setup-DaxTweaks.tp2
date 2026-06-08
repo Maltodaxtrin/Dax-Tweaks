@@ -7,13 +7,35 @@ VERSION ~1.0~
 ASK_EVERY_COMPONENT                                                                // Disallow installing all components at once
 LANGUAGE ~English~ ~english~ ~DaxTweaks/lang/english/english.tra~
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Add Cowled Menace spellcasters to the list of SCS spellcasters that receive HLA's (unlock their HLA's)
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+BEGIN @5 DESIGNATED 50
+
+	REQUIRE_PREDICATE (MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) @5005 		// SCS Smarter Mages required for this component - Please install Sword Coast Stratagems - Smarter Mages to proceed
+	REQUIRE_PREDICATE (MOD_IS_INSTALLED ~cowledmenace/setup-cowledmenace.tp2~ 1000) @5006 	// Required mod missing -- Install Cowled Menace first
+	
+	ACTION_FOR_EACH cre IN ~dx#zalla.cre~ ~dx#lich1.cre~ ~dx#lichj.cre~
+	BEGIN
+		ACTION_IF FILE_EXISTS_IN_GAME ~%cre%~ BEGIN
+			COPY_EXISTING ~%cre%~ ~override~
+				ADD_CRE_ITEM ~dw#hlamg~ #0 #0 #0 ~none~ ~inv~											// Mage HLA marker that tells SCS to enable HLA's on the creature
+			BUT_ONLY
+		END
+	END 
+
+
 /////////////////////////////////////////////////////////
 // Properly change Imoen Avatar to Mage in BG2 - CDTweaks
 /////////////////////////////////////////////////////////
 
+
 BEGIN @10 DESIGNATED 100
-	REQUIRE_COMPONENT ~setup-cdtweaks.tp2~ 20 @5001 // Required mod missing: Tweaks Anthology - Change Imoen's Avatar to Mage
-	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 //Required file missing - install BG2
+	REQUIRE_COMPONENT ~setup-cdtweaks.tp2~ 20 @5001 			// Required mod missing: Tweaks Anthology - Change Imoen's Avatar to Mage
+	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 	//Required file missing - install BG2
 
 // Patch all cutscene and dream Imoen avatars as well
 
@@ -32,9 +54,11 @@ BEGIN @10 DESIGNATED 100
 // Replace the generic Lich in the "Spawn Undead" script (Install after SCS/Tactics if present)
 ////////////////////////////////////////////////////////////////////////////
 
+
 //
 // Replace with a comparatively easier spellcasting Ancient Mummy
 //
+	
 	
 BEGIN @21 DESIGNATED 210 SUBCOMPONENT @20
 	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 //Required file missing - install BG2
@@ -73,9 +97,11 @@ BEGIN @21 DESIGNATED 210 SUBCOMPONENT @20
 		END 
 	END
 	
+	
 //
 // Replace with a vanilla Ancient Vampire
 //
+
 
 BEGIN @22 DESIGNATED 220 SUBCOMPONENT @20
 	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 //Required file missing - install BG2
@@ -102,9 +128,11 @@ BEGIN @22 DESIGNATED 220 SUBCOMPONENT @20
 // Replace the Lich in the City Gates Inn
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 //
 // Replace with a comparatively easier custom spellcasting Ancient Mummy
 //
+
 
 BEGIN @31 DESIGNATED 310 SUBCOMPONENT @30
 
@@ -159,9 +187,11 @@ BEGIN @31 DESIGNATED 310 SUBCOMPONENT @30
 		END 
 	END
 
+
 //
 // Replace with a vanilla Greater Mummy
 //
+
 
 BEGIN @32 DESIGNATED 320 SUBCOMPONENT @30
 
@@ -210,6 +240,7 @@ BEGIN @40 DESIGNATED 400
 // Spellcasters cast Cacofiend and Gate far from themselves, so they don't end up fighting their own summoned demon (Useless with SCS)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 BEGIN @50 DESIGNATED 500
 
 	REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) @5003
@@ -228,6 +259,7 @@ BEGIN @50 DESIGNATED 500
 			BUT_ONLY   
 		END
 	END
+
 	
 ////////////////////////////////////////////////////////////////////////////////////////////
 // Use pre-EE Spell Deflection Globe (EE only)
@@ -235,10 +267,11 @@ BEGIN @50 DESIGNATED 500
 
 
 	// Only for Spell Trap (recommended)
+	
 
 BEGIN @61 DESIGNATED 610 SUBCOMPONENT @60
 
-	REQUIRE_PREDICATE (ENGINE_IS ~bg2ee~) @5002
+	REQUIRE_PREDICATE (ENGINE_IS ~bg2ee~) @5002 	// This component requires Baldur's Gate 2: Enhanced Edition to be installed
 
 	COPY ~cowledmenace/SpellTrap/dx#trap.bam~     ~override~
 	COPY ~cowledmenace/SpellTrap/dx#strap.vvc~     ~override~ 
@@ -306,6 +339,8 @@ BEGIN @61 DESIGNATED 610 SUBCOMPONENT @60
 	
 	// For all of them
 	
+	
 BEGIN @62 DESIGNATED 620 SUBCOMPONENT @60
 
-	COPY ~cowledmenace/SpellTrap/SPMAGGLO.bam~     ~override~    		// Fully replace EE spell effect with pre-EE spell effect for all spells using that effect
+	COPY ~cowledmenace/SpellTrap/SPMAGGLO.bam~     ~override~    				// Fully replace EE spell effect with pre-EE spell effect for all spells using that effect
+	
