@@ -2,7 +2,7 @@
 
 BACKUP ~DaxTweaks/backup~
 AUTHOR ~Daxtreme/Maltodaxtrin~
-VERSION ~1.0~
+VERSION ~1.0.1~
 
 ASK_EVERY_COMPONENT                                                                // Disallow installing all components at once
 LANGUAGE ~English~ ~english~ ~DaxTweaks/lang/english/english.tra~
@@ -156,6 +156,17 @@ BEGIN @31 DESIGNATED 310 SUBCOMPONENT @30
 			END
 		END
 	BUT_ONLY
+	
+										// If SCS Smarter Mages is installed, make sure that the door-locking script recognizes the new Mummy
+	ACTION_IF (MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) BEGIN
+		COPY_EXISTING ~ar0082.bcs~ ~override~
+			DECOMPILE_AND_PATCH BEGIN
+				REPLACE_TEXTUALLY CASE_INSENSITIVE ~Dead("grvlch01")~ ~Dead("dx#grvmu")~
+			END
+		BUT_ONLY
+	END
+	
+	
 										// Distribute back the items that the vanilla Lich had to the empty sarcophagus in the room
 	
 	ACTION_IF (MOD_IS_INSTALLED ~randomiser.tp2~ 1100) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1200) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1300) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1400) BEGIN
@@ -208,6 +219,16 @@ BEGIN @32 DESIGNATED 320 SUBCOMPONENT @30
 			END
 		END
 	BUT_ONLY
+	
+										// If SCS Smarter Mages is installed, make sure that the door-locking script recognizes the new Mummy
+	ACTION_IF (MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) BEGIN
+		COPY_EXISTING ~ar0082.bcs~ ~override~
+			DECOMPILE_AND_PATCH BEGIN
+				REPLACE_TEXTUALLY CASE_INSENSITIVE ~Dead("grvlch01")~ ~Dead("mumgre01")~
+			END
+		BUT_ONLY
+	END
+	
 										// Distribute back the items that the vanilla Lich had to the empty sarcophagus in the room
 	
 	ACTION_IF (MOD_IS_INSTALLED ~randomiser.tp2~ 1100) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1200) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1300) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1400) BEGIN
@@ -271,7 +292,7 @@ BEGIN @50 DESIGNATED 500
 
 BEGIN @61 DESIGNATED 610 SUBCOMPONENT @60
 
-	REQUIRE_PREDICATE (ENGINE_IS ~bg2ee~) @5002 	// This component requires Baldur's Gate 2: Enhanced Edition to be installed
+	REQUIRE_PREDICATE GAME_IS ~bg2ee eet~ @5002 	// This component requires Baldur's Gate 2: Enhanced Edition to be installed
 
 	COPY ~cowledmenace/SpellTrap/dx#trap.bam~     ~override~
 	COPY ~cowledmenace/SpellTrap/dx#strap.vvc~     ~override~ 
@@ -341,6 +362,8 @@ BEGIN @61 DESIGNATED 610 SUBCOMPONENT @60
 	
 	
 BEGIN @62 DESIGNATED 620 SUBCOMPONENT @60
+
+	REQUIRE_PREDICATE GAME_IS ~bg2ee eet~ @5002 	// This component requires Baldur's Gate 2: Enhanced Edition to be installed
 
 	COPY ~cowledmenace/SpellTrap/SPMAGGLO.bam~     ~override~    				// Fully replace EE spell effect with pre-EE spell effect for all spells using that effect
 	

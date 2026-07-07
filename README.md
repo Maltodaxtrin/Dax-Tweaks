@@ -33,11 +33,8 @@ Here is a list of components available for installation.
 
 **Add Cowled Menace spellcasters to the list of SCS mages that receive HLA's (unlock their HLA's)**
 
-If you install SCS Smarter Mages and play on Insane difficulty, specific vanilla spellcasters in SoA will have access to HLAs, but not all of them. The selection is arbitrary, and most notably doesn't include any modded NPCs such as the ones from Cowled Menace.
-
-So if you want "HLA's for specific spellcasters in the game" setting to include those from Cowled Menace as well (I recommend it since some of them are indeed worthy of them lore-wise), then install this component. Now some spellcasters from Cowled Menace (3 to be exact) will be able to hurl planetars at you on Insane difficulty, as intended (of course). If it ain't a planetar, it's gonna be a Comet or a Dragon's Breath. Good times!
-
-Why isn't this included in the main Cowled Menace mod? Because this tweak needs to be installed after SCS, while Cowled Menace is installed way earlier (after NPC mods). Also, many tweaks here have to be installed after SCS, so it's a good fit. 
+Self explanatory but if you want select Cowled Menace spellcasters to hurl planetars at you with SCS, this is the component for it (Insane+ difficulty only). Included here instead of Cowled Menace because it has to be installed after SCS (Cowled Menace is installed way before SCS: after NPC mods) 
+ 
 Compatibility: This component requires both Cowled Menace and SCS Smarter Mages to be installed. It's 100% compatible with everything else as it does nothing except unlock SCS HLA's.
 
 **Properly change Imoen Avatar to Mage in BG2 - CDTweaks**
@@ -129,5 +126,9 @@ You are allowed to submit [maintenance updates](MAINTENANCE-NOTICE.md) for this 
 This Modification is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC. This mod is also not developed, supported, or endorsed by BioWare, Black Isle Studios, Interplay Entertainment Corp., Overhaul Games or Beamdog. All other trademarks and copyrights are property of their respective owners.
 
 ## Version History
+
+1.0.1 -- Bug fix
+
+- Now accounts for the lich not being there in the City Gates cellar when SCS is installed. The door will properly unlock after the mummy dies. (thanks to Elder Enigma)
 
 1.0 -- First release
