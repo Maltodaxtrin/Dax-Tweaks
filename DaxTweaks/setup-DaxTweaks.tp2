@@ -2,11 +2,53 @@
 
 BACKUP ~DaxTweaks/backup~
 AUTHOR ~Daxtreme/Maltodaxtrin~
-VERSION ~1.0.1~
+VERSION ~1.0.2~
 
-ASK_EVERY_COMPONENT                                                                // Disallow installing all components at once
+ASK_EVERY_COMPONENT                                                                					// Disallow installing all components at once
 LANGUAGE ~English~ ~english~ ~DaxTweaks/lang/english/english.tra~
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Cowled Menace - Unofficial Item Pack compatibility patch 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @4 DESIGNATED 40
+
+	REQUIRE_PREDICATE (MOD_IS_INSTALLED ~Unofficial Item Pack/Setup-Unofficial Item Pack.tp2~ 4) @5007 		// Unofficial Item Pack not detected - Skipping this component
+	REQUIRE_PREDICATE (MOD_IS_INSTALLED ~cowledmenace/setup-cowledmenace.tp2~ 1000) @5006 					// Required mod missing -- Install Cowled Menace first
+	
+	// Vanilla Zallanora edit (MAGE18Z.CRE)
+	// Basically the TL;DR is that vanilla Zallanora will still show up in the final fight but as a Simulacrum of the real Zallanora (the one I added to Cowled Menace that is essential for the questline, also done this way for better compatibility)
+	// This makes the fight quite harder
+	// Unofficial Item Pack destructively replaces the whole MAGE18Z CRE file just to add an item. I'm ignoring most of the changes though because they don't have the biggest of impact.
+	
+	COMPILE ~DaxTweaks\baf\mage18z.baf~
+
+	ACTION_IF FILE_EXISTS_IN_GAME ~mage18z.cre~ BEGIN
+		COPY_EXISTING ~mage18z.cre~ ~override~
+			PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+				WRITE_LONG 0x14 22000																	// Adjust xp reward to 22,000 since she is level 22 (Simulacrum is 60% of 36)
+				WRITE_LONG 0x244 0x10000000																// Change Kit to Necromancer
+				WRITE_BYTE 0x27b 0x23 																	// Lawful Neutral --> Neutral Evil
+			END
+			SAY NAME1 @1012																				// Zallanora's Simulacrum
+			SAY NAME2 @1012																				// Zallanora's Simulacrum
+			READ_ASCII SCRIPT_CLASS name																// Read Class Script
+		BUT_ONLY
+		ACTION_IF (~%name%~ STRING_EQUAL_CASE ~None~ != 1) BEGIN										// If script is empty, it means another mod such as SCS deleted it and replaced it in another slot. No need to do anything.
+			COPY_EXISTING ~mage18z.cre~ ~override~
+				WRITE_ASCII 0x250 ~mage18z~ #8															// Otherwise, we revert the broken one introduced by Unofficial Item Pack
+			BUT_ONLY 
+		END
+	END 
+	
+	ACTION_IF (MOD_IS_INSTALLED ~setup-cowledmenace.tp2~ 1100) BEGIN									// If "difficulty add-on" component from Cowled Menace is installed, then take it into account
+		COPY_EXISTING ~mage18z.bcs~ ~override~															// Zallanora default combat AI script
+			DECOMPILE_AND_PATCH BEGIN
+				REPLACE_TEXTUALLY CASE_INSENSITIVE ~WIZARD_ENERGY_DRAIN~ ~WIZARD_SUMMON_PLANATAR_EVIL~								
+			END
+	BUT_ONLY
+	END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Add Cowled Menace spellcasters to the list of SCS spellcasters that receive HLA's (unlock their HLA's)
@@ -15,14 +57,14 @@ LANGUAGE ~English~ ~english~ ~DaxTweaks/lang/english/english.tra~
 
 BEGIN @5 DESIGNATED 50
 
-	REQUIRE_PREDICATE (MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) @5005 		// SCS Smarter Mages required for this component - Please install Sword Coast Stratagems - Smarter Mages to proceed
-	REQUIRE_PREDICATE (MOD_IS_INSTALLED ~cowledmenace/setup-cowledmenace.tp2~ 1000) @5006 	// Required mod missing -- Install Cowled Menace first
+	REQUIRE_PREDICATE (MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) @5005 				// SCS Smarter Mages required for this component - Please install Sword Coast Stratagems - Smarter Mages to proceed
+	REQUIRE_PREDICATE (MOD_IS_INSTALLED ~cowledmenace/setup-cowledmenace.tp2~ 1000) @5006 			// Required mod missing -- Install Cowled Menace first
 	
-	ACTION_FOR_EACH cre IN ~dx#zalla.cre~ ~dx#lich1.cre~ ~dx#lichj.cre~
+	ACTION_FOR_EACH cre IN ~dx#zalla.cre~ ~dx#lich1.cre~ ~dx#lichj.cre~								// MAGE18Z skipped as SCS already gives her HLAs
 	BEGIN
 		ACTION_IF FILE_EXISTS_IN_GAME ~%cre%~ BEGIN
 			COPY_EXISTING ~%cre%~ ~override~
-				ADD_CRE_ITEM ~dw#hlamg~ #0 #0 #0 ~none~ ~inv~											// Mage HLA marker that tells SCS to enable HLA's on the creature
+				ADD_CRE_ITEM ~dw#hlamg~ #0 #0 #0 ~none~ ~inv~										// Mage HLA marker that tells SCS to enable HLAs on the creature
 			BUT_ONLY
 		END
 	END 
@@ -34,10 +76,10 @@ BEGIN @5 DESIGNATED 50
 
 
 BEGIN @10 DESIGNATED 100
-	REQUIRE_COMPONENT ~setup-cdtweaks.tp2~ 20 @5001 			// Required mod missing: Tweaks Anthology - Change Imoen's Avatar to Mage
-	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 	//Required file missing - install BG2
+	REQUIRE_COMPONENT ~setup-cdtweaks.tp2~ 20 @5001 												// Required mod missing: Tweaks Anthology - Change Imoen's Avatar to Mage
+	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 										// Required file missing - install BG2
 
-// Patch all cutscene and dream Imoen avatars as well
+// (Patch all cutscene and dream Imoen avatars as well)
 
 	ACTION_FOR_EACH cre IN ~CSIMOEN.cre~ ~Dream1.cre~ ~PPDRIMO.cre~ ~DRIM01.cre~ ~DRIM02.cre~ ~ppdrimov.cre~ 
 				~CUIMOEN.cre~ ~CUIMOEN2.cre~ ~CUIMOEN3.cre~ ~dpimo01.cre~ ~IMOENDRM.cre~ ~OHB1IMOE.cre~ ~PPIMOEN.cre~ ~TTIMOEN.cre~
@@ -61,7 +103,7 @@ BEGIN @10 DESIGNATED 100
 	
 	
 BEGIN @21 DESIGNATED 210 SUBCOMPONENT @20
-	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 //Required file missing - install BG2
+	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 										//Required file missing - install BG2
 	
 	COMPILE ~DaxTweaks/baf/dx#grvmu.baf~
 	
@@ -69,16 +111,16 @@ BEGIN @21 DESIGNATED 210 SUBCOMPONENT @20
 	SAY NAME1 @1006		SAY NAME2 @1006
 	WRITE_ASCII 0x250 ~dx#grvmu~ #8
 	
-  	ACTION_IF FILE_EXISTS_IN_GAME ~SPWNDEAD.BCS~ BEGIN			 					// Default spawn undead script
+  	ACTION_IF FILE_EXISTS_IN_GAME ~SPWNDEAD.BCS~ BEGIN			 									// Default spawn undead script
 		COPY_EXISTING ~SPWNDEAD.BCS~ ~override~
-			DECOMPILE_AND_PATCH BEGIN												// Spot 1: Ghoul Town in Unseeing Quest - Temple District
-				REPLACE_TEXTUALLY CASE_INSENSITIVE ~lich01~ ~dx#grvmu~				// Spot 2: Temple Ruins - Shadow Temple (1st)
-			END																		// Spot 3: Temple Ruins - Shadow Temple (2nd)
-		BUT_ONLY																	// Spot 4: Spellhold Maze - Bodhi's Hunt Level 2
+			DECOMPILE_AND_PATCH BEGIN																// Spot 1: Ghoul Town in Unseeing Quest - Temple District
+				REPLACE_TEXTUALLY CASE_INSENSITIVE ~lich01~ ~dx#grvmu~								// Spot 2: Temple Ruins - Shadow Temple (1st)
+			END																						// Spot 3: Temple Ruins - Shadow Temple (2nd)
+		BUT_ONLY																					// Spot 4: Spellhold Maze - Bodhi's Hunt Level 2
 	END
 	
 	
-	ACTION_IF FILE_EXISTS_IN_GAME ~C6VAMP.BCS~ BEGIN			 					// Unused spawn undead script after chapter 6, but added here just in case a mod re-enables it
+	ACTION_IF FILE_EXISTS_IN_GAME ~C6VAMP.BCS~ BEGIN			 									// Unused spawn undead script after chapter 6, but added here just in case a mod re-enables it
 		COPY_EXISTING ~C6VAMP.BCS~ ~override~
 			DECOMPILE_AND_PATCH BEGIN
 				REPLACE_TEXTUALLY CASE_INSENSITIVE ~lich01~ ~dx#grvmu~
@@ -86,13 +128,13 @@ BEGIN @21 DESIGNATED 210 SUBCOMPONENT @20
 		BUT_ONLY
 	END 
 	
-	ACTION_IF (MOD_IS_INSTALLED ~setup-cowledmenace.tp2~ 2100) BEGIN						// If "Appropriate Rewards for High Level Spellcasters" component from Cowled Menace is installed, then take into account this new spellcaster.
+	ACTION_IF (MOD_IS_INSTALLED ~setup-cowledmenace.tp2~ 2100) BEGIN								// If "Appropriate Rewards for High Level Spellcasters" component from Cowled Menace is installed, then take into account this new spellcaster.
 		ACTION_IF FILE_EXISTS_IN_GAME ~dx#grvmu.cre~ BEGIN
-			COPY_EXISTING ~dx#grvmu.cre~ ~override~														// Ancient Mummy (my own creation)
-				ADD_CRE_ITEM ~rndtre04~ #0 #0 #0 ~none~ ~inv~											// Random Treasure4
-				ADD_CRE_ITEM ~rndtre05~ #0 #0 #0 ~none~ ~inv~											// Random Treasure5
-				ADD_CRE_ITEM ~RNDSCR04~ #1 #0 #0 ~none~ ~inv~ 											// Random Scroll Category 4
-				ADD_CRE_ITEM ~RNDWAND~ #10 #10 #0 ~none~ ~qitem~										// Random Wand
+			COPY_EXISTING ~dx#grvmu.cre~ ~override~													// Ancient Mummy (my own creation)
+				ADD_CRE_ITEM ~rndtre04~ #0 #0 #0 ~none~ ~inv~										// Random Treasure4
+				ADD_CRE_ITEM ~rndtre05~ #0 #0 #0 ~none~ ~inv~										// Random Treasure5
+				ADD_CRE_ITEM ~RNDSCR04~ #1 #0 #0 ~none~ ~inv~ 										// Random Scroll Category 4
+				ADD_CRE_ITEM ~RNDWAND~ #10 #10 #0 ~none~ ~qitem~									// Random Wand
 			BUT_ONLY
 		END 
 	END
@@ -104,18 +146,18 @@ BEGIN @21 DESIGNATED 210 SUBCOMPONENT @20
 
 
 BEGIN @22 DESIGNATED 220 SUBCOMPONENT @20
-	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 //Required file missing - install BG2
+	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 										//Required file missing - install BG2
 	
-  	ACTION_IF FILE_EXISTS_IN_GAME ~SPWNDEAD.BCS~ BEGIN			 					// Default spawn undead script
+  	ACTION_IF FILE_EXISTS_IN_GAME ~SPWNDEAD.BCS~ BEGIN			 									// Default spawn undead script
 		COPY_EXISTING ~SPWNDEAD.BCS~ ~override~
-			DECOMPILE_AND_PATCH BEGIN												// Spot 1: Ghoul Town in Unseeing Quest - Temple District
-				REPLACE_TEXTUALLY CASE_INSENSITIVE ~lich01~ ~VAMANC01~				// Spot 2: Temple Ruins - Shadow Temple (1st)
-			END																		// Spot 3: Temple Ruins - Shadow Temple (2nd)
-		BUT_ONLY																	// Spot 4: Spellhold Maze - Bodhi's Hunt Level 2
+			DECOMPILE_AND_PATCH BEGIN																// Spot 1: Ghoul Town in Unseeing Quest - Temple District
+				REPLACE_TEXTUALLY CASE_INSENSITIVE ~lich01~ ~VAMANC01~								// Spot 2: Temple Ruins - Shadow Temple (1st)
+			END																						// Spot 3: Temple Ruins - Shadow Temple (2nd)
+		BUT_ONLY																					// Spot 4: Spellhold Maze - Bodhi's Hunt Level 2
 	END
 	
 	
-	ACTION_IF FILE_EXISTS_IN_GAME ~C6VAMP.BCS~ BEGIN			 					// Unused spawn undead script after chapter 6, but added here just in case a mod re-enables it
+	ACTION_IF FILE_EXISTS_IN_GAME ~C6VAMP.BCS~ BEGIN			 									// Unused spawn undead script after chapter 6, but added here just in case a mod re-enables it
 		COPY_EXISTING ~C6VAMP.BCS~ ~override~
 			DECOMPILE_AND_PATCH BEGIN
 				REPLACE_TEXTUALLY CASE_INSENSITIVE ~lich01~ ~VAMANC01~
@@ -128,7 +170,6 @@ BEGIN @22 DESIGNATED 220 SUBCOMPONENT @20
 // Replace the Lich in the City Gates Inn
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 //
 // Replace with a comparatively easier custom spellcasting Ancient Mummy
 //
@@ -136,16 +177,16 @@ BEGIN @22 DESIGNATED 220 SUBCOMPONENT @20
 
 BEGIN @31 DESIGNATED 310 SUBCOMPONENT @30
 
-	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 //Required file missing - install BG2
+	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 										//Required file missing - install BG2
 	
 	COMPILE ~DaxTweaks/baf/dx#grvmu.baf~
 	
-	COPY ~DaxTweaks/cre/dx#grvmu.cre~ ~override~					// Ancient Mummy
+	COPY ~DaxTweaks/cre/dx#grvmu.cre~ ~override~													// Ancient Mummy
 	SAY NAME1 @1006		SAY NAME2 @1006
 	WRITE_ASCII 0x250 ~dx#grvmu~ #8
 	
 	
-	COPY_EXISTING ~ar0082.are~ ~override~ 							// City Gates Inn - Lich Room
+	COPY_EXISTING ~ar0082.are~ ~override~ 															// City Gates Inn - Lich Room
 		PATCH_IF SOURCE_SIZE > 0x28f BEGIN
 			LPF ALTER_AREA_ACTOR
 				INT_VAR
@@ -157,8 +198,7 @@ BEGIN @31 DESIGNATED 310 SUBCOMPONENT @30
 		END
 	BUT_ONLY
 	
-										// If SCS Smarter Mages is installed, make sure that the door-locking script recognizes the new Mummy
-	ACTION_IF (MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) BEGIN
+	ACTION_IF (MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) BEGIN						// If SCS Smarter Mages is installed, make sure that the door-unlocking script recognizes the new Mummy
 		COPY_EXISTING ~ar0082.bcs~ ~override~
 			DECOMPILE_AND_PATCH BEGIN
 				REPLACE_TEXTUALLY CASE_INSENSITIVE ~Dead("grvlch01")~ ~Dead("dx#grvmu")~
@@ -166,34 +206,31 @@ BEGIN @31 DESIGNATED 310 SUBCOMPONENT @30
 		BUT_ONLY
 	END
 	
-	
-										// Distribute back the items that the vanilla Lich had to the empty sarcophagus in the room
-	
 	ACTION_IF (MOD_IS_INSTALLED ~randomiser.tp2~ 1100) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1200) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1300) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1400) BEGIN
-	    COPY_EXISTING ~ar0082.are~ ~override~
-			PATCH_PRINT @5004 // Item Randomiser detected, not re-distributing 1 item meant to be randomised
+	    COPY_EXISTING ~ar0082.are~ ~override~														// Distribute back the items that the vanilla Lich had to the empty sarcophagus in the room
+			PATCH_PRINT @5004 	// Item Randomiser detected, not re-distributing 1 item meant to be randomised
 			LPF ADD_AREA_ITEM INT_VAR container_to_add_to=2 STR_VAR item_to_add=~RING05~ END
-			LPF ADD_AREA_ITEM INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND13~ END			// Don't distribute the Rod of Terror if Item Randomiser is installed since it could show up elsewhere
+			LPF ADD_AREA_ITEM INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND13~ END		// Don't distribute the Rod of Terror if Item Randomiser is installed since it could show up elsewhere
 			LPF ADD_AREA_ITEM INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND07~ END
 			LPF ADD_AREA_ITEM INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND05~ END
 		BUT_ONLY
 	END ELSE BEGIN
 		COPY_EXISTING ~ar0082.are~ ~override~	
 			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~RING05~ END
-			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND13~ END			// Distribute the Rod of Terror as well if Item randomiser is not installed
+			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND13~ END		// Distribute the Rod of Terror as well if Item randomiser is not installed
 			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND07~ END
 			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND05~ END
 			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~RODS05~ END
 		BUT_ONLY
 	END
-										// If "Appropriate Rewards for High Level Spellcasters" component from Cowled Menace is installed, then take into account this new spellcaster, unless already done in component 210.
+															// If "Appropriate Rewards for High Level Spellcasters" component from Cowled Menace is installed, then take into account this new spellcaster, unless already done in component 210.
 	ACTION_IF (MOD_IS_INSTALLED ~setup-cowledmenace.tp2~ 2100) AND NOT (MOD_IS_INSTALLED ~setup-DaxTweaks.tp2~ 210) BEGIN		
 		ACTION_IF FILE_EXISTS_IN_GAME ~dx#grvmu.cre~ BEGIN
-			COPY_EXISTING ~dx#grvmu.cre~ ~override~														// Ancient Mummy (my own creation)
-				ADD_CRE_ITEM ~rndtre04~ #0 #0 #0 ~none~ ~inv~											// Random Treasure4
-				ADD_CRE_ITEM ~rndtre05~ #0 #0 #0 ~none~ ~inv~											// Random Treasure5
-				ADD_CRE_ITEM ~RNDSCR04~ #1 #0 #0 ~none~ ~inv~ 											// Random Scroll Category 4
-				ADD_CRE_ITEM ~RNDWAND~ #10 #10 #0 ~none~ ~qitem~										// Random Wand
+			COPY_EXISTING ~dx#grvmu.cre~ ~override~													// Ancient Mummy (my own creation)
+				ADD_CRE_ITEM ~rndtre04~ #0 #0 #0 ~none~ ~inv~										// Random Treasure4
+				ADD_CRE_ITEM ~rndtre05~ #0 #0 #0 ~none~ ~inv~										// Random Treasure5
+				ADD_CRE_ITEM ~RNDSCR04~ #1 #0 #0 ~none~ ~inv~ 										// Random Scroll Category 4
+				ADD_CRE_ITEM ~RNDWAND~ #10 #10 #0 ~none~ ~qitem~									// Random Wand
 			BUT_ONLY
 		END 
 	END
@@ -206,9 +243,9 @@ BEGIN @31 DESIGNATED 310 SUBCOMPONENT @30
 
 BEGIN @32 DESIGNATED 320 SUBCOMPONENT @30
 
-	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 //Required file missing - install BG2
+	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 										//Required file missing - install BG2
 	
-	COPY_EXISTING ~ar0082.are~ ~override~ 							// City Gates Inn - Lich Room
+	COPY_EXISTING ~ar0082.are~ ~override~ 															// City Gates Inn - Lich Room
 		PATCH_IF SOURCE_SIZE > 0x28f BEGIN
 			LPF ALTER_AREA_ACTOR
 				INT_VAR
@@ -220,8 +257,7 @@ BEGIN @32 DESIGNATED 320 SUBCOMPONENT @30
 		END
 	BUT_ONLY
 	
-										// If SCS Smarter Mages is installed, make sure that the door-locking script recognizes the new Mummy
-	ACTION_IF (MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) BEGIN
+	ACTION_IF (MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) BEGIN						// If SCS Smarter Mages is installed, make sure that the door-unlocking script recognizes the new Mummy
 		COPY_EXISTING ~ar0082.bcs~ ~override~
 			DECOMPILE_AND_PATCH BEGIN
 				REPLACE_TEXTUALLY CASE_INSENSITIVE ~Dead("grvlch01")~ ~Dead("mumgre01")~
@@ -229,20 +265,18 @@ BEGIN @32 DESIGNATED 320 SUBCOMPONENT @30
 		BUT_ONLY
 	END
 	
-										// Distribute back the items that the vanilla Lich had to the empty sarcophagus in the room
-	
 	ACTION_IF (MOD_IS_INSTALLED ~randomiser.tp2~ 1100) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1200) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1300) OR (MOD_IS_INSTALLED ~randomiser.tp2~ 1400) BEGIN
-	    COPY_EXISTING ~ar0082.are~ ~override~
+	    COPY_EXISTING ~ar0082.are~ ~override~														// Distribute back the items that the vanilla Lich had to the empty sarcophagus in the room
 			PATCH_PRINT @5004 // Item Randomiser detected, not re-distributing 1 item meant to be randomised
 			LPF ADD_AREA_ITEM INT_VAR container_to_add_to=2 STR_VAR item_to_add=~RING05~ END
-			LPF ADD_AREA_ITEM INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND13~ END			// Don't distribute the Rod of Terror if Item Randomiser is installed since it could show up elsewhere
+			LPF ADD_AREA_ITEM INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND13~ END		// Don't distribute the Rod of Terror if Item Randomiser is installed since it could show up elsewhere
 			LPF ADD_AREA_ITEM INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND07~ END
 			LPF ADD_AREA_ITEM INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND05~ END
 		BUT_ONLY
 	END ELSE BEGIN
 		COPY_EXISTING ~ar0082.are~ ~override~	
 			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~RING05~ END
-			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND13~ END			// Distribute the Rod of Terror as well if Item randomiser is not installed
+			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND13~ END		// Distribute the Rod of Terror as well if Item randomiser is not installed
 			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND07~ END
 			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~WAND05~ END
 			LPF ~ADD_AREA_ITEM~ INT_VAR container_to_add_to=2 STR_VAR item_to_add=~RODS05~ END
@@ -264,8 +298,8 @@ BEGIN @40 DESIGNATED 400
 
 BEGIN @50 DESIGNATED 500
 
-	REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) @5003
-	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 //Required file missing -- install Baldur's Gate 2
+	REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 6030) @5003				// SCS Smarter Mages detected - Skipping this component as it is redundant
+	REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~mage18z.cre~ @5000 										// Required file missing -- install Baldur's Gate 2
 	
 	ACTION_FOR_EACH bcs IN ~demmag.bcs~ ~mage20b.bcs~ ~hellgen.bcs~ ~ohhayes1.bcs~ ~gphealer.bcs~ ~ohrhealr.bcs~
 	
@@ -292,13 +326,13 @@ BEGIN @50 DESIGNATED 500
 
 BEGIN @61 DESIGNATED 610 SUBCOMPONENT @60
 
-	REQUIRE_PREDICATE GAME_IS ~bg2ee eet~ @5002 	// This component requires Baldur's Gate 2: Enhanced Edition to be installed
+	REQUIRE_PREDICATE GAME_IS ~bg2ee eet~ @5002 													// This component requires Baldur's Gate 2: Enhanced Edition to be installed
 
 	COPY ~cowledmenace/SpellTrap/dx#trap.bam~     ~override~
 	COPY ~cowledmenace/SpellTrap/dx#strap.vvc~     ~override~ 
 	
 	ACTION_IF FILE_EXISTS_IN_GAME ~spwi902.spl~ BEGIN
-		COPY_EXISTING ~spwi902.spl~ ~override~ 			// Spell Trap
+		COPY_EXISTING ~spwi902.spl~ ~override~ 				// Spell Trap
 			LPF ADD_SPELL_EFFECT 
 				INT_VAR 
 				opcode = 291				// Disable EE spell effect
@@ -363,7 +397,7 @@ BEGIN @61 DESIGNATED 610 SUBCOMPONENT @60
 	
 BEGIN @62 DESIGNATED 620 SUBCOMPONENT @60
 
-	REQUIRE_PREDICATE GAME_IS ~bg2ee eet~ @5002 	// This component requires Baldur's Gate 2: Enhanced Edition to be installed
+	REQUIRE_PREDICATE GAME_IS ~bg2ee eet~ @5002 													// This component requires Baldur's Gate 2: Enhanced Edition to be installed
 
-	COPY ~cowledmenace/SpellTrap/SPMAGGLO.bam~     ~override~    				// Fully replace EE spell effect with pre-EE spell effect for all spells using that effect
+	COPY ~cowledmenace/SpellTrap/SPMAGGLO.bam~     ~override~    									// Fully replace EE spell effect with pre-EE spell effect for all spells using that effect
 	

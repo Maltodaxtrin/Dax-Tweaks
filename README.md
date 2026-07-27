@@ -31,15 +31,31 @@ Please run **setup-DaxTweaks.exe** in your BG2 folder to reinstall, uninstall, o
 
 Here is a list of components available for installation.
 
-**Add Cowled Menace spellcasters to the list of SCS mages that receive HLA's (unlock their HLA's)**
+**Cowled Menace - Unofficial Item Pack compatibility patch **
 
-Self explanatory but if you want select Cowled Menace spellcasters to hurl planetars at you with SCS, this is the component for it (Insane+ difficulty only). Included here instead of Cowled Menace because it has to be installed after SCS (Cowled Menace is installed way before SCS: after NPC mods) 
+In this component, I make an effort to revert the most impactful of the changes that Unofficial Item Pack makes to a vanilla creature I use, Zallanora (MAGE18Z) so that my mod Cowled Menace can work without issues.
+
+Compatibility: Install this after both Unofficial Item Pack and Cowled Menace have been installed. It doesn't really serve a purpose other than make these 2 mods work seamlessly together, but it might revert some changes made by other mods to MAGE18Z specifically. Probably a good idea to revert them anyway if my mod is to function properly. Note: The community-maintained update of Unofficial Item Pack on github will make this component obsolete once it releases.
+
+**Cowled Menace - Add certain spellcasters to the list of SCS mages that receive HLA's (unlock their HLA's)**
+
+Self explanatory but if you want select Cowled Menace spellcasters to hurl planetars at you with SCS, this is the component for it (Insane difficulty and above only). Included here instead of Cowled Menace because it has to be installed after SCS (Cowled Menace is installed way before SCS: after NPC mods).
  
-Compatibility: This component requires both Cowled Menace and SCS Smarter Mages to be installed. It's 100% compatible with everything else as it does nothing except unlock SCS HLA's.
+Compatibility: This component requires both Cowled Menace and SCS Smarter Mages to be installed. It's 100% compatible with everything else as it does nothing except unlock SCS HLA's for these spellcasters.
 
-**Properly change Imoen Avatar to Mage in BG2 - CDTweaks**
+Not all spellcasters added by Cowled Menace get HLA's. Only those 3:
+
+```
+DX#ZALLA (new Zallanora)
+DX#LICH1 (Kartak Spellseer)
+DX#LICHJ (Jymahna)
+```
+
+**CDTweaks - Properly change Imoen Avatar to Mage in BG2**
 
 The Tweaks Anthology component that changes Imoen's Avatar to mage only changes her avatar for playable versions of Imoen. This component also replaces the missing 14 instances of Imoen used in cutscenes and dreams throughout the game with a mage avatar. For consistency purposes.
+
+For now it's fixed in the dev build but not in the latest release of Tweaks Anthology, so I'm leaving it in temporarily. 
 
 Compatibility: This component does not account for new versions of Imoen added by other mods.
 
@@ -47,7 +63,7 @@ Compatibility: This component does not account for new versions of Imoen added b
 
 Lore-wise, liches shouldn't be as common, *especially* not in random places.
 
-What does this component do? Simple. It dynamically removes the 4 generic liches in the level-dependent undead spawn: If you're high level enough, 2 of them spawn in Temple Ruins (Umar Hills), 1 in Ghoul Town (Unseeing Eye), and 1 in Spellhold (Bodhi's Hunt Level 2), replacing them with one of two options: 
+What does this component do? Simple. It dynamically removes the 4 generic liches in the level-dependent undead spawn: If you're high level enough, 2 of them spawn in Temple Ruins (Umar Hills), 1 in Ghoul Town (Unseeing Eye), and 1 in Spellhold (Bodhi's Hunt Level 2), replacing them with one of two options depending on what you want: 
 
 1. Replace with a custom and comparatively easier spellcasting Ancient Mummy
 2. Replace with an Ancient Vampire (vanilla enemy)
@@ -64,7 +80,7 @@ In very much the same vein as the component above, the goal of this component is
 
 Like the previous component, the options are either a custom spellcasting mummy (exactly the same as above) or a Greater Mummy (vanilla enemy)
 
-Compatibility: My tweaks should be installed after SCS and so the mummy will not benefit from the improved SCS AI (the vampire will since it's a vanilla enemy). I have given the mummy a reasonably-competent AI that should make it at least a passable challenge. For a mummy anyway. Definitely don't expect a Lich-level challenge, but it could still surprise you if caught unprepared. I am still looking for ways to add the SCS AI to the mummy if SCS is installed, but since SCS is so modular, it's quite hard to figure out the whole thing. But it's functional right now for sure.
+Compatibility: My tweaks should be installed after SCS and so the spellcasting mummy will not benefit from the improved SCS AI (the greater mummy will since it's a vanilla enemy). I have given the custom mummy a reasonably-competent AI that should make it at least a passable challenge. For a mummy anyway. Definitely don't expect a Lich-level challenge, but it could still surprise you if caught unprepared. I am still looking for ways to add the SCS AI to the mummy if SCS is installed, but since SCS is so modular, it's quite hard to figure out the whole thing. But it's functional right now for sure.
 
 I have accounted for Item Randomiser, so if it's installed, the Rod of Terror belonging to the Lich in the vanilla game won't be re-added back. The chest in the area is unaffected and will work fine with the randomisation. As this is a tweak mod, you should install Item Randomiser first before this mod. Any other mod that somehow requires the City Gates Inn Lich specifically for something precise, or adds items to this Lich, will be incompatible by virtue of these items being distributed to a creature that is no longer in the game. Obviously this component will break any mod that requires it to be, well, there. It's no longer there. Please let me know if such a mod exists besides item randomiser so I can account for it. 
 
@@ -88,9 +104,9 @@ Modded Charisma
 
 In contrast to vanilla, you get some small results earlier, and get rewarded for increasing charisma beyond 20. Hopefully this component makes charisma a stat worth considering sometimes instead of a pure dump stat. Sure, the ring can fix it for you by setting it at 18, but having 25 charisma (if you somehow manage to make it there), offers a massive difference in price now, so it might be worth checking out ways to increase it, instead of ignoring it entirely like in the base game. 
 
-klatu made a similar tweak, but unfortunately it actually nerfs the impact of charisma from 19 to 21 compared to vanilla, which is most likely unintended as people don't install this type of component expecting a nerf to the effect of their charisma on store prices. Increasing charisma beyond 18 should see more benefits, not less.
+klatu made a similar tweak, but unfortunately it actually nerfed the impact of charisma from 19 to 21 compared to vanilla, which is most likely unintended as people don't install this type of component expecting a nerf to the effect of their charisma on store prices. Increasing charisma beyond 18 should see more benefits, not less.
 
-Compatibility: Any other mod that changes how charisma affects store prices will be incompatible.
+Compatibility: Any other mod that changes how charisma affects store prices will be incompatible. Compatible with everything else.
 
 **Spellcasters cast Cacofiend and Gate far from themselves, so they don't end up fighting their own summoned demon (Useless with SCS)**
 
@@ -104,7 +120,7 @@ This component has 2 options to choose from: Either the old pre-EE globe is adde
 
 ![Visuals screenshot](https://media.invisioncic.com/u284679/monthly_2026_05/image.png.f7e920de1eb90ad427bf94dcdd16a37c.png)
 
-As of May 5th 2026 (v2.0.1 of Cowled Menace), this component works as expected. If you installed it before that along with Cowled Menace, it is probably not working as intended (the effect doesn't expire). Sorry about that. It's no longer part of Cowled Menace and is instead in this tweaks mod.
+As of May 5th 2026 (v2.0.1 of Cowled Menace), this component works as expected. If you installed it before that along with Cowled Menace, it is probably not working as intended (the effect doesn't expire). Sorry about that. It's no longer part of Cowled Menace and is instead in this tweaks mod now.
 
 ## Thanks and Acknowledgements
 
@@ -126,6 +142,10 @@ You are allowed to submit [maintenance updates](MAINTENANCE-NOTICE.md) for this 
 This Modification is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC. This mod is also not developed, supported, or endorsed by BioWare, Black Isle Studios, Interplay Entertainment Corp., Overhaul Games or Beamdog. All other trademarks and copyrights are property of their respective owners.
 
 ## Version History
+
+1.0.2 -- Small compatibility patch
+
+- Added new component to fix Unofficial Item Pack compatibility with v2.1.0 of my Cowled Menace mod, which requires both Cowled Menace and Unofficial Item Pack to be installed. Not required for the new community-maintained version of the mod on github, only the original on Beamdog forums.
 
 1.0.1 -- Bug fix
 

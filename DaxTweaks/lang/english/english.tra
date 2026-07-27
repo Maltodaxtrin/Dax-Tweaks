@@ -1,5 +1,6 @@
 @0 = ~DaxTweaks~
 
+@4 = ~Cowled Menace - Unofficial Item Pack compatibility patch~
 @5 = ~Add Cowled Menace spellcasters to the list of SCS spellcasters that receive HLA's (unlock their HLA's)~
 @10 = ~Properly change Imoen Avatar to Mage in BG2 - CDTweaks correction~
 @20 = ~Replace the generic Lich in the "Spawn Undead" script (Install after SCS/Tactics if present)~
@@ -20,6 +21,7 @@
 @5004 = ~Item Randomiser detected, not re-distributing 1 item meant to be randomised~
 @5005 = ~SCS Smarter Mages required for this component - Please install Sword Coast Stratagems - Smarter Mages to proceed~
 @5006 = ~Required mod missing -- Install Cowled Menace first~
+@5007 = ~Unofficial Item Pack - New Items component not detected - Skipping this component~
 
 @400 = ~Protected by Death Ward~
 @401 = ~Protected by Blade Barrier~
@@ -27,3 +29,4 @@
 @407 = ~Protected by Iron Skins~
 
 @1006 = ~Ancient Mummy~
+@1012 = ~Zallanora's Simulacrum~
