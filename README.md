@@ -31,7 +31,7 @@ Please run **setup-DaxTweaks.exe** in your BG2 folder to reinstall, uninstall, o
 
 Here is a list of components available for installation.
 
-**Cowled Menace - Unofficial Item Pack compatibility patch **
+**Cowled Menace - Unofficial Item Pack compatibility patch**
 
 In this component, I make an effort to revert the most impactful of the changes that Unofficial Item Pack makes to a vanilla creature I use, Zallanora (MAGE18Z) so that my mod Cowled Menace can work without issues.
 
