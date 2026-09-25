@@ -84,6 +84,8 @@ Compatibility: My tweaks should be installed after SCS and so the spellcasting m
 
 I have accounted for Item Randomiser, so if it's installed, the Rod of Terror belonging to the Lich in the vanilla game won't be re-added back. The chest in the area is unaffected and will work fine with the randomisation. As this is a tweak mod, you should install Item Randomiser first before this mod. Any other mod that somehow requires the City Gates Inn Lich specifically for something precise, or adds items to this Lich, will be incompatible by virtue of these items being distributed to a creature that is no longer in the game. Obviously this component will break any mod that requires it to be, well, there. It's no longer there. Please let me know if such a mod exists besides item randomiser so I can account for it. 
 
+Beaurin Legacy: Requires the crooked crane lich to be there, therefore it is an outright incompatibility.
+
 **Charisma Affects Store Prices More (klatu revised)**
 
 This component widens the effect charisma has on store prices. So you'll start to see a (minimal, 2% discount) impact at 13 charisma, up to a massive 50% discount at 25 charisma. No change at 18 charisma.
